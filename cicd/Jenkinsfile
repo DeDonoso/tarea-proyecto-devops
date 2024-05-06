@@ -3,16 +3,85 @@ pipeline {
     stages {
         stage('node pipeline') {
             agent {
-                docker { image 'node:20.11.1-alpine3.19' }
+                docker { image 'node:20.11.1-alpine3.19' 
+                reuseNode true 
+                }
+           
             }
             stages {
-                stage('checkout') {
+                stage('Instalar') {
                     steps {
-                        echo "hola mundo"
+                       sh 'npm install'
+                    }
+                }
+                stage('Ejecutar test') {
+                    steps {
+                       sh 'npm run test'
+                    }
+                 }
+                stage('Ejecutar build') {
+                    steps {
+                       sh 'npm run build'
                     }
 
                 }
+      
             }
         }
+
+       stage('Calidad del código') {  
+            stages {
+                   stage('build & sonarQube analysis'){
+                        agent {
+                              docker {
+                                image 'sonarsource/sonar-scanner-cli'
+                                args  '--network="devops-infra_default"'
+                                reuseNode true
+                              }  
+
+                        }
+                       steps {
+                            withSonarQubeEnv('sonarqube'){
+                                sh 'sonar-scanner'
+                            }
+                       }
+                   } 
+                   stage('Quality Gate: Puerta de calidad'){
+                        steps {
+                            timeout(time: 1, unit: 'HOURS') {
+                                waitForQualityGate abortPipeline: true
+                            }
+                        }
+                   } 
+            }
+         }    
+        
+       
+        stage('delivery to docker: crear imagen docker') {        
+                steps {
+                    script { 
+                    docker.withRegistry('http://localhost:8082','nexus-key') {
+                    sh 'docker build -t localhost:8082/proyecto-devops .'
+                    sh "docker tag localhost:8082/proyecto-devops localhost:8082/proyecto-devops:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+                    sh 'docker push localhost:8082/proyecto-devops'
+                    sh "docker push localhost:8082/proyecto-devops:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+                         }
+
+                     }  
+                }
+
+         }     
+         stage('Deploy por Compose') {       
+                steps {
+                    script { 
+                    docker.withRegistry('http://localhost:8082','nexus-key') {
+                    sh 'docker-compose pull'
+                    sh 'docker-compose up --force-recreate --build -d'
+                            }
+
+                        }
+                }
+
+         }  
     }
 }

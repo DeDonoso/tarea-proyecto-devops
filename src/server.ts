@@ -4,6 +4,10 @@ import { dividir, multiplicar, restar, sumar } from "./calcular.js";
 const app = express();
 app.use(express.json());
 
+const ambiente = process.env.NODE_ENV || "Ambiente_desconocido"
+const api = process.env.API_KEY || "Api_desconocida"
+
+
 app.get("/", (req, res) => {
   res.send("hola mundo");
 });
@@ -21,5 +25,15 @@ app.post("/calcular", (req, res) => {
   }
   return res.send({ resultado: "hola mundo" });
 });
+
+app.get("/info", (req, res) => {
+  res.send(`Prueba de variable entorno ambiente con docker-compose: ${ambiente}`);
+});
+
+app.get("/api", (req, res) => {
+  res.send(`Prueba de variable entorno api-key con docker-compose: ${api}`);
+});
+
+
 
 export default app;
