@@ -7,8 +7,6 @@ services:
      environment:
      - NODE_ENV=development
      - API_KEY=/run/secrets/api_file
-     volumes:
-      - /Work-Space/ficheros-contenedor:/var/ficheros
      secrets:
       - api_file  
 secrets:
