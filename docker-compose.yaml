@@ -3,7 +3,7 @@ services:
      image: localhost:8082/tarea-proyecto-devops
      restart: always
      ports: 
-      - "3001:3001"
+      - "3000:3000"
      environment:
      - NODE_ENV=development
      - API_KEY=/run/secrets/api_file
