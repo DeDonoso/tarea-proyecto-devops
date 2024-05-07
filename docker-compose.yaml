@@ -1,16 +1,15 @@
 services:
-  tarea-proyecto-devops:
-    image: localhost:8082/tarea-proyecto-devops
-    restart: always
-    ports: 
-      - "3000:3000"
-    environment:
-      NODE_ENV: development
-      API_KEY: /run/secrets/my_secret 
-    volumes:
-      - /Work-Space/ficheros-contenedor:/var/ficheros  
-    secrets:
-      - my_secret
+  backend:
+    tarea-proyecto-devops:
+      image: localhost:8082/tarea-proyecto-devops
+      restart: always
+      ports: 
+        - "3000:3000"
+      environment:
+        NODE_ENV: development
+        API_KEY: /run/secrets/my_secret 
+      secrets:
+        - my_secret
 
 secrets:
     my_secret:
