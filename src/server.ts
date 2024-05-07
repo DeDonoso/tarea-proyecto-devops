@@ -1,11 +1,13 @@
 import express from "express";
 import { dividir, multiplicar, restar, sumar } from "./calcular.js";
 
+let fs = require('fs');
+
 const app = express();
 app.use(express.json());
 
 const ambiente = process.env.NODE_ENV || "Ambiente_desconocido"
-const api = process.env.API_KEY || "Api_desconocida"
+const api = fs.readFileSync('/run/secrets/my_secret.txt', 'utf8');
 
 
 app.get("/", (req, res) => {
