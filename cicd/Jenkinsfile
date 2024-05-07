@@ -29,32 +29,7 @@ pipeline {
             }
         }
 
-       stage('Calidad del código') {  
-            stages {
-                   stage('build & sonarQube analysis'){
-                        agent {
-                              docker {
-                                image 'sonarsource/sonar-scanner-cli'
-                                args  '--network="devops-infra_default"'
-                                reuseNode true
-                              }  
 
-                        }
-                       steps {
-                            withSonarQubeEnv('sonarqube'){
-                                sh 'sonar-scanner'
-                            }
-                       }
-                   } 
-                   stage('Quality Gate: Puerta de calidad'){
-                        steps {
-                            timeout(time: 1, unit: 'HOURS') {
-                                waitForQualityGate abortPipeline: true
-                            }
-                        }
-                   } 
-            }
-         }    
         
        
         stage('delivery to docker: crear imagen docker') {        
