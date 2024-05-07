@@ -1,5 +1,6 @@
 name: tarea-proyecto-devops
 services:
+  tarea-proyecto-devops:
      image: localhost:8082/tarea-proyecto-devops
      restart: always
      ports: 
