@@ -6,7 +6,7 @@ services:
       - "3000:3000"
      environment:
       NODE_ENV: development
-      API_KEY: /run/secrets/api_file     
+      API_KEY: /run/secrets/my_secret   
      secrets:
       - my_secret
 secrets:
