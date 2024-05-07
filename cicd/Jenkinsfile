@@ -36,10 +36,10 @@ pipeline {
                 steps {
                     script { 
                     docker.withRegistry('http://localhost:8082','nexus-key') {
-                    sh 'docker build -t localhost:8082/proyecto-devops .'
-                    sh "docker tag localhost:8082/proyecto-devops localhost:8082/proyecto-devops:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
-                    sh 'docker push localhost:8082/proyecto-devops'
-                    sh "docker push localhost:8082/proyecto-devops:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+                    sh 'docker build -t localhost:8082/tarea-proyecto-devops .'
+                    sh "docker tag localhost:8082/tarea-proyecto-devops localhost:8082/tarea-proyecto-devops:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+                    sh 'docker push localhost:8082/tarea-proyecto-devops'
+                    sh "docker push localhost:8082/tarea-proyecto-devops:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
                          }
 
                      }  

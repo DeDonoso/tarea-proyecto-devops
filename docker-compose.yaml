@@ -1,7 +1,7 @@
 name: proyecto-devops
 services:
    backend: 
-     image: localhost:8082/proyecto-devops
+     image: localhost:8082/tarea-proyecto-devops
      restart: always
      ports: 
       - "3000:3000"
