@@ -29,9 +29,6 @@ pipeline {
             }
         }
 
-
-        
-       
         stage('delivery to docker: crear imagen docker') {        
                 steps {
                     script { 
