@@ -37,7 +37,18 @@ describe("index module testing", () => {
             .expect(200)
             .then((response) => {
                 expect(response.text).not.toBe("hola mundo!");
-                expect(response.text).toBe("hola mundo");
+                expect(response.text).toBe("Tarea docker-compose Hola Mundo");
+            });
+    })
+
+    
+    test("test endpoint /ambiente", async () => {
+        return await request(app)
+            .get("/")
+            .expect('Content-Type', /text/)
+            .expect(200)
+            .then((response) => {
+                expect(response.text).not.toBe("");
             });
     })
 });
