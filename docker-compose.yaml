@@ -1,6 +1,5 @@
 services:
-  backend:
-    tarea-proyecto-devops:
+ tarea-proyecto-devops:
       image: localhost:8082/tarea-proyecto-devops
       restart: always
       ports: 
