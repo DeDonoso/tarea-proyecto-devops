@@ -9,7 +9,7 @@ const api = process.env.API_KEY || "Api_desconocida"
 
 
 app.get("/", (req, res) => {
-  res.send("hola mundo");
+  res.send("Tarea docker-compose Hola Mundo");
 });
 
 app.post("/calcular", (req, res) => {
