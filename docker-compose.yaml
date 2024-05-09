@@ -12,4 +12,4 @@ services:
 
 secrets:
     my_secret:
-      file: my_secret.txt
+      file: ./my_secret.txt

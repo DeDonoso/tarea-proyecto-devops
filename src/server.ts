@@ -6,8 +6,12 @@ let fs = require('fs');
 const app = express();
 app.use(express.json());
 
+
+
 const ambiente = process.env.NODE_ENV || "Ambiente_desconocido"
 const api = fs.readFileSync('/run/secrets/my_secret.txt', 'utf8');
+
+
 
 
 app.get("/", (req, res) => {
@@ -34,6 +38,7 @@ app.get("/info", (req, res) => {
 
 app.get("/api", (req, res) => {
   res.send(`Prueba de variable entorno api-key con docker-compose: ${api}`);
+  console.log(api);
 });
 
 
