@@ -1,29 +1,24 @@
 services:
- tarea-proyecto-devops:
-      image: localhost:8082/tarea-proyecto-devops
-      restart: always
-      volumes:
-        - my-volume:/path/in/container
-      ports: 
+  backend:
+    image: localhost:8082/tarea-proyecto-devops
+    restart: always
+    volumes:
+      - db-data:/etc/data
+    ports: 
         - "3000:3000"
-      environment:
-        NODE_ENV: development
-        API_KEY: /run/secrets/my_secret 
-      secrets:
-        - my_secret
+  backup:
+    image: backup-service
+    volumes:
+      - db-data:/var/lib/backup/data
+  environment:
+    NODE_ENV: development
+    API_KEY: /run/secrets/my_secret 
+  secrets:
+      - my_secret
 
 secrets:
-    my_secret:
-      file: my_secret.txt
+  my_secret:
+    file: my_secret.txt
+
 volumes:
-  my-volume:
-    driver: local
-    driver_opts:
-      type: none
-      device: /path/to/my-volume
-      o: bind
-    external: false
-    labels:
-      - "Volumen para mi servicio"
-    name: my-volume
-    scope: local
+  db-data:
