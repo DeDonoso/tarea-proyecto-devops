@@ -9,7 +9,7 @@ app.use(express.json());
 
 
 const ambiente = process.env.NODE_ENV || "Ambiente_desconocido"
-const api = process.env.API_KEY || "Ambiente_desconocido"
+const api = fs.readFileSync('/run/secrets/my_secret.txt', 'utf8');
 
 
 
