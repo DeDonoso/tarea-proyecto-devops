@@ -1,13 +1,19 @@
 services:
-  backend:
-    image: localhost:8082/tarea-proyecto-devops
-    restart: always
-    volumes:
-      - db-data:/etc/data
-    ports: 
+   backend:
+     image: localhost:8082/tarea-proyecto-devops
+     ports: 
         - "3000:3000"
-    environment:
-      NODE_ENV: development
+     volumes:
+       -  db-data:/etc/data
+     environment:
+       NODE_ENV: development
+       API_KEY: /run/secrets/db_password
+     secrets:
+       - db_root_password
+
+secrets:
+   db_password:
+     file: my_secret.txt
 
 volumes:
-  db-data:
+    db_data:
