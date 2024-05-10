@@ -3,7 +3,7 @@ services:
       image: localhost:8082/tarea-proyecto-devops
       restart: always
       volumes:
-        - db_data: /var/www/html
+        - "vol2:/usr/share/"
       ports: 
         - "3000:3000"
       environment:
@@ -16,5 +16,4 @@ secrets:
     my_secret:
       file: my_secret.txt
 volumes:
-  db_data:
-    type: none
+  vol2:
