@@ -17,3 +17,4 @@ secrets:
       file: my_secret.txt
 volumes:
   db_data:
+    type: none
