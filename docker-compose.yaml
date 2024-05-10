@@ -4,7 +4,7 @@ services:
      ports: 
         - "3000:3000"
      volumes:
-       -  db_data:/usr/src/app
+       -  db_data:/AppData/Local/
      environment:
        NODE_ENV: development
        API_KEY: /run/secrets/db_password
