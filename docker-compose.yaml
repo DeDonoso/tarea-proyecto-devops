@@ -3,7 +3,7 @@ services:
       image: localhost:8082/tarea-proyecto-devops
       restart: always
       volumes:
-        - "vol2:/usr/share/"
+        - my-volume:/path/in/container
       ports: 
         - "3000:3000"
       environment:
@@ -16,4 +16,14 @@ secrets:
     my_secret:
       file: my_secret.txt
 volumes:
-  vol2:
+  my-volume:
+    driver: local
+    driver_opts:
+      type: none
+      device: /path/to/my-volume
+      o: bind
+    external: false
+    labels:
+      - "Volumen para mi servicio"
+    name: my-volume
+    scope: local
