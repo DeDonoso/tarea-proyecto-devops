@@ -4,7 +4,7 @@ services:
      ports: 
         - "3000:3000"
      volumes:
-       -  jenkins_home:/var/jenkins_home
+       -  db_data:/var/my_data
      environment:
        NODE_ENV: development
        API_KEY: /run/secrets/db_password
