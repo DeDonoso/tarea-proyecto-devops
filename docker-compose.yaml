@@ -6,16 +6,11 @@ services:
       - db-data:/etc/data
     ports: 
         - "3000:3000"
-  backup:
-    image: backup-service
-    volumes:
-      - db-data:/var/lib/backup/data
-  environment:
-    NODE_ENV: development
-    API_KEY: /run/secrets/my_secret 
-  secrets:
+    environment:
+      NODE_ENV: development
+      API_KEY: /run/secrets/my_secret 
+    secrets:
       - my_secret
-
 secrets:
   my_secret:
     file: my_secret.txt
