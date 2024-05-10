@@ -11,6 +11,7 @@ services:
       API_KEY: /run/secrets/my_secret 
     secrets:
       - my_secret
+      
 secrets:
   my_secret:
     file: my_secret.txt
