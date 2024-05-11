@@ -7,13 +7,4 @@ services:
        -  db_data:/var/my_data
      environment:
        NODE_ENV: development
-       API_KEY: /run/secrets/db_password
-     secrets:
-       - db_password
-
-secrets:
-   db_password:
-     file: my_secret.txt
-
-volumes:
-    db_data:
+       API_KEY: api.davidonoso.cl
