@@ -8,7 +8,7 @@ app.use(express.json());
 
 
 const ambiente = process.env.NODE_ENV || "Ambiente_desconocido"
-const api = 'prueba'
+const api = process.env.API_KEY || "Api_desconocido"
 
 
 app.get("/", (req, res) => {
