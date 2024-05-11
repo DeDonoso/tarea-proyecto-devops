@@ -3,8 +3,6 @@ services:
      image: localhost:8082/tarea-proyecto-devops
      ports: 
         - "3000:3000"
-     volumes:
-       -  db_data:/var/my_data
      environment:
        NODE_ENV: development
        API_KEY: api.davidonoso.cl
